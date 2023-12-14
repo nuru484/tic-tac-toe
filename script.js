@@ -15,7 +15,8 @@ const Tic_Tac_Toe = (() => {
   ];
 
   const cells = document.querySelectorAll(".cell");
-  const winResults = document.getElementById("win-results");
+  const winResults = document.getElementById("win-results-text");
+  const winResultsContainer = document.getElementById("win-results");
 
   cells.forEach((cell, index) => {
     cell.addEventListener("click", () => {
@@ -26,9 +27,14 @@ const Tic_Tac_Toe = (() => {
 
         if (checkWin()) {
           winResults.textContent = `Player ${currentPlayer} wins!`;
+
+          winResultsContainer.style.display = "block";
+
           turn = 9;
         } else if (turn === 9) {
           winResults.textContent = `It's a tie!`;
+
+          winResultsContainer.style.display = "block";
         } else {
           currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
@@ -56,6 +62,7 @@ const Tic_Tac_Toe = (() => {
     winResults.textContent = "";
     currentPlayer = "X";
     turn = 0;
+    winResultsContainer.style.display = "none";
   };
   return {
     restartGame,
