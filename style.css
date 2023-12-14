@@ -1,5 +1,6 @@
 * {
   background-color: antiquewhite;
+  box-sizing: border-box;
 }
 .cells-container {
   display: grid;
@@ -11,7 +12,7 @@
 }
 
 .cell {
-  background-color: rgb(108, 11, 27);
+  background-color: #6c0b1b;
   color: white;
   font-size: 45px;
   line-height: 2;
@@ -19,4 +20,25 @@
 }
 .cell:hover {
   cursor: pointer;
+}
+.win-results {
+  text-align: center;
+  font-size: 35px;
+  padding-bottom: -20px;
+}
+button {
+  width: 120px;
+  height: 45px;
+  border-radius: 5px;
+  color: #6c0b1b;
+  border-style: none;
+  background-color: white;
+  box-shadow: 1px 3px 5px 0px black;
+}
+
+button:hover {
+  cursor: pointer;
+  border: 2px solid white;
+  background-color: #6c0b1b;
+  color: white;
 }
