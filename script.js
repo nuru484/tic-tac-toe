@@ -1,4 +1,4 @@
-const Tic_Tac_Toe = () => {
+const Tic_Tac_Toe = (() => {
   const gameBoard = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = "X";
   let turn = 0;
@@ -49,18 +49,22 @@ const Tic_Tac_Toe = () => {
     }
     return false;
   };
-  return {
-    gameBoard,
-    winResults,
-    cells,
-    currentPlayer,
-    turn,
-  };
-};
 
-Tic_Tac_Toe();
+  const restartGame = () => {
+    gameBoard.fill("");
+    cells.forEach((cell) => (cell.textContent = ""));
+    winResults.textContent = "";
+    currentPlayer = "X";
+    turn = 0;
+  };
+  return {
+    restartGame,
+  };
+})();
 
 const display = (() => {
   const restartElement = document.querySelector("button");
-  restartElement.addEventListener("click", (event) => {});
+  restartElement.addEventListener("click", () => {
+    Tic_Tac_Toe.restartGame();
+  });
 })();
