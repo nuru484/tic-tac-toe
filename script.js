@@ -3,7 +3,7 @@ let currentPlayer = "X";
 let turn = 0;
 
 const winningCriteria = [
-  [0, 2, 3],
+  [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
   [0, 3, 6],
@@ -13,16 +13,25 @@ const winningCriteria = [
   [2, 4, 6],
 ];
 
-const playerMove = () => {
-  let move;
-  do {
-    move = prompt("Please enter your move:");
-    if (move < 0 || move > 9 || isNaN(move)) {
-      move = prompt("Invalid move, please enter a valid move from 1 to 9");
+const cells = document.querySelectorAll(".cell");
+
+cells.forEach((cell, index) => {
+  cell.addEventListener("click", () => {
+    if (gameBoard[index] === "" && turn < 9) {
+      gameBoard[index] = currentPlayer;
+      cell.textContent = currentPlayer;
+      turn++;
+
+      if (checkWin()) {
+        console.log(`Player ${currentPlayer} wins!`);
+      } else if (turn === 9) {
+        console.log("It's a tie!");
+      } else {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+      }
     }
-  } while (move < 0 || move > 9 || isNaN(move));
-  return parseInt(move) - 1;
-};
+  });
+});
 
 const checkWin = () => {
   for (const criteria of winningCriteria) {
@@ -32,27 +41,8 @@ const checkWin = () => {
       gameBoard[a] === gameBoard[b] &&
       gameBoard[a] === gameBoard[c]
     ) {
-      return true; // Player has won
+      return true;
     }
   }
-  return false; // No winner yet
+  return false;
 };
-
-while (turn < 9) {
-  const move = playerMove();
-
-  gameBoard[move] = currentPlayer;
-  console.log(gameBoard);
-
-  if (checkWin()) {
-    console.log(`Player ${currentPlayer} wins!`);
-    break;
-  }
-
-  currentPlayer = currentPlayer === "X" ? "Y" : "X";
-  turn++;
-}
-
-if (turn === 9) {
-  console.log("It's a tie!");
-}
